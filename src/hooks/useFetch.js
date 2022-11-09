@@ -11,6 +11,7 @@ const useFetch = (url) => {
       setData(() => json);
     };
 
+    //everytime url or API end point changes; component get re-evaluated, to run the fetch function after change in state it should be invoked inside the useEffect
     fetchData();
 
     //passing url as the dependency array because; url is the only value that might change over time; in that case the component should re-evaluate to consume and update the new state
