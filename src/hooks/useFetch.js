@@ -8,9 +8,11 @@ export const useFetch = (url) => {
 
   useEffet(() => {
     const fetchData = async () => {
+      //abortController is used to unsubcribe the fetch stream after the component unmounts
+      const controller = new AbortController();
       setLoading(() => true);
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { signal: controller.signal });
         const json = await response.json();
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -19,14 +21,23 @@ export const useFetch = (url) => {
         setData(() => json);
         setError(() => null);
       } catch (err) {
-        setLoading(() => false);
-        setError(() => 'Could not fetch the data!!');
+        if (err.name === 'AbortError') {
+          console.log('Fetch was aborted!!');
+        } else {
+          setLoading(() => false);
+          setError(() => 'Could not fetch the data!!');
+        }
+
         //console.log(err);
       }
     };
 
     //everytime url or API end point changes; component get re-evaluated, to run the fetch function after change in state it should be invoked inside the useEffect
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
 
     //passing url as the dependency array because; url is the only value that might change over time; in that case the component should re-evaluate to consume and update the new state
   }, [url]);
