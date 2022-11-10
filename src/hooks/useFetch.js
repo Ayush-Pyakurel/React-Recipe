@@ -1,18 +1,28 @@
-import { useState, useEffet } from 'react';
+import { useState, useEffect } from 'react';
 
 //function accept url as argument to make it dynamic
 export const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffet(() => {
     const fetchData = async () => {
       setLoading(() => true);
-      const response = await fetch(url);
-      const json = await response.json();
-
-      setLoading(() => false);
-      setData(() => json);
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        setLoading(() => false);
+        setData(() => json);
+        setError(() => null);
+      } catch (err) {
+        setLoading(() => false);
+        setError(() => 'Could not fetch the data!!');
+        //console.log(err);
+      }
     };
 
     //everytime url or API end point changes; component get re-evaluated, to run the fetch function after change in state it should be invoked inside the useEffect
@@ -22,5 +32,5 @@ export const useFetch = (url) => {
   }, [url]);
 
   //cusotme hook always return some value/date; can return array, object
-  return { data };
+  return { data, loading, error };
 };
