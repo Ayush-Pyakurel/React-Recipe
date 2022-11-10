@@ -7,10 +7,9 @@ export const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    //abortController is used to unsubcribe the fetch stream after the component unmounts
     const controller = new AbortController();
     const fetchData = async () => {
-      //abortController is used to unsubcribe the fetch stream after the component unmounts
-
       setLoading(() => true);
       try {
         const response = await fetch(url, { signal: controller.signal });
