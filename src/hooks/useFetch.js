@@ -17,15 +17,15 @@ export const useFetch = (url) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        setLoading(() => false);
-        setData(() => json);
-        setError(() => null);
+        setLoading(false);
+        setData(json);
+        setError(null);
       } catch (err) {
         if (err.name === 'AbortError') {
           console.log('Fetch was aborted!!');
         } else {
-          setLoading(() => false);
-          setError(() => 'Could not fetch the data!!');
+          setLoading(false);
+          setError('Could not fetch the data!!');
         }
 
         //console.log(err);
