@@ -6,10 +6,11 @@ export const useFetch = (url) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffet(() => {
+  useEffect(() => {
+    const controller = new AbortController();
     const fetchData = async () => {
       //abortController is used to unsubcribe the fetch stream after the component unmounts
-      const controller = new AbortController();
+
       setLoading(() => true);
       try {
         const response = await fetch(url, { signal: controller.signal });
@@ -35,6 +36,7 @@ export const useFetch = (url) => {
     //everytime url or API end point changes; component get re-evaluated, to run the fetch function after change in state it should be invoked inside the useEffect
     fetchData();
 
+    //clean up function for useEffect to avoid memory leak
     return () => {
       controller.abort();
     };
