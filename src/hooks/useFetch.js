@@ -1,13 +1,17 @@
 import { useState, useEffet } from 'react';
 
 //function accept url as argument to make it dynamic
-const useFetch = (url) => {
+export const useFetch = (url) => {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffet(() => {
     const fetchData = async () => {
+      setLoading(() => true);
       const response = await fetch(url);
       const json = await response.json();
+
+      setLoading(() => false);
       setData(() => json);
     };
 
@@ -20,5 +24,3 @@ const useFetch = (url) => {
   //cusotme hook always return some value/date; can return array, object
   return { data };
 };
-
-export default useFetch;
