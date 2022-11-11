@@ -7,11 +7,15 @@ const Create = () => {
   const [method, setMethod] = useState('');
   const [cookingTime, setCookingTime] = useState('');
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(method, cookingTime, title);
+  };
   return (
     <div className='create'>
-      <h2>Add New Recipe: </h2>
+      <h2 className='page-title'>Add New Recipe: </h2>
 
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label>
           <span>Recipe Title: </span>
           <input
@@ -44,6 +48,7 @@ const Create = () => {
             value={cookingTime}
           />
         </label>
+        <button className='btn'>Submit</button>
       </form>
     </div>
   );
