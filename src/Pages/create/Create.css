@@ -2,7 +2,7 @@
   max-width: 490px;
   box-sizing: border-box;
   color: #555;
-  margin: 60px auto;
+  margin: 20px auto;
 }
 
 .create label span {
@@ -21,10 +21,19 @@
   border-radius: 4px;
   width: 100px;
   padding: 5px 15px;
-  margin: 20px auto;
+  margin: 10px auto;
   cursor: pointer;
   text-decoration: none;
   font-size: 1em;
   background-color: #58249c;
   color: white;
+}
+
+.ingrediants {
+  display: flex;
+  align-items: center;
+}
+
+.ingrediants button {
+  margin: 0 0 0 10px;
 }
