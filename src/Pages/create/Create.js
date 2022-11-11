@@ -48,7 +48,7 @@ const Create = () => {
             value={cookingTime}
           />
         </label>
-        <button className='btn'>Submit</button>
+        <button>Submit</button>
       </form>
     </div>
   );
