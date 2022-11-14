@@ -1,5 +1,7 @@
 import './Create.css';
 
+import { useFetch } from '../../hooks/useFetch';
+
 import { useState, useRef, useEffect } from 'react';
 
 const Create = () => {
@@ -7,9 +9,14 @@ const Create = () => {
   const [method, setMethod] = useState('');
   const [cookingTime, setCookingTime] = useState('');
   const [newIngrediants, setNewIngrediants] = useState('');
-  const [ingrediants, setIngrediants] = useState([]);
+  const [ingredients, setIngrediants] = useState([]);
 
   const titleRef = useRef(null);
+
+  const { postData, error, loading } = useFetch(
+    'http://localhost:3000/recipes',
+    'POST'
+  );
 
   //auto focus on the first input field immediately the component render
   useEffect(() => {
@@ -19,7 +26,12 @@ const Create = () => {
   //funtion to submit the form
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(method, cookingTime, title);
+    postData({
+      title,
+      ingredients,
+      method,
+      cookingTime: `${cookingTime} mins`,
+    });
   };
 
   //function to add the ingrediants
@@ -28,7 +40,7 @@ const Create = () => {
     const trimedIngrediants = newIngrediants.trim();
 
     //as ingrediants should not be duplicated; this is to check wheather the ingrediants are unique or not and updating the new added ingrediants inside array
-    if (trimedIngrediants && !ingrediants.includes(trimedIngrediants)) {
+    if (trimedIngrediants && !ingredients.includes(trimedIngrediants)) {
       setIngrediants((prevIngrediants) => [
         ...prevIngrediants,
         trimedIngrediants,
@@ -61,16 +73,16 @@ const Create = () => {
                   setNewIngrediants(e.target.value);
                 }}
                 value={newIngrediants}
-                required
               />
               <button onClick={handleAddIngrediants}>Add</button>
             </div>
           </label>
           <p>
             Current Ingrediants:{' '}
-            {ingrediants.map((ingrediant) => (
-              <em key={ingrediant}>{ingrediant},</em>
-            ))}
+            {ingredients &&
+              ingredients.map((ingrediant) => (
+                <em key={ingrediant}>{ingrediant},</em>
+              ))}
           </p>
         </>
         <label>
@@ -94,7 +106,7 @@ const Create = () => {
             value={cookingTime}
           />
         </label>
-        <button>Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     </div>
   );

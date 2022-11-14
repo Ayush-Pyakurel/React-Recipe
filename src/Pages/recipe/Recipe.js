@@ -16,9 +16,10 @@ export default function Recipe() {
           <h1 className='page-title'>{recipe.title}</h1>
           <p>{recipe.cookingTime}</p>
           <ul>
-            {recipe.ingredients.map((ingredient) => {
-              return <li key={ingredient}>{ingredient}</li>;
-            })}
+            {recipe.ingredients &&
+              recipe.ingredients.map((ingredient) => {
+                return <li key={ingredient}>{ingredient}</li>;
+              })}
           </ul>
           <p className='method'>{recipe.method}</p>
         </>

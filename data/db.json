@@ -36,6 +36,52 @@
       ],
       "method": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse minima ex rem quis similique eum ratione quaerat, voluptas molestias ut repudiandae delectus voluptates. Eius esse at tenetur ab accusamus excepturi?",
       "cookingTime": "35 minutes"
+    },
+    {
+      "title": "Keema Noodle",
+      "ingrediants": [
+        "Keema",
+        "Noodle",
+        "Salad",
+        "Soya sauce"
+      ],
+      "method": "Boil and mix them well",
+      "cookingTime": "20 mins",
+      "id": "FrqNGC7"
+    },
+    {
+      "title": "Momo",
+      "ingredients": [
+        "Maida",
+        "Keema",
+        "Cabbage",
+        "Masala"
+      ],
+      "method": "Wrap keema with maid and boil it for 15 mins",
+      "cookingTime": "45 mins",
+      "id": "-A4MX6H"
+    },
+    {
+      "title": "Pizza",
+      "ingrediants": [
+        "Dough",
+        "Cheese"
+      ],
+      "method": "Bake them all",
+      "cookingTime": "45 mins",
+      "id": "6aU8ZTP"
+    },
+    {
+      "title": "Sandwitch",
+      "ingredients": [
+        "Bread",
+        "Salad",
+        "Cheese",
+        "Mao"
+      ],
+      "method": "Mix them and have a bite",
+      "cookingTime": "10 mins",
+      "id": "QBI1Ud0"
     }
   ]
 }
