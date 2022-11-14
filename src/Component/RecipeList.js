@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import '../Component/RecipeList.css';
 
 const RecipeList = ({ recipes }) => {
+  //condition to check wheather the array is empty or not; cause even empty array returns a truthy value
+  if (recipes.length === 0) {
+    return <div className='error'>No Recipe to display...</div>;
+  }
+
   return (
     <div className='recipe-list'>
       {recipes.map((recipe) => {
