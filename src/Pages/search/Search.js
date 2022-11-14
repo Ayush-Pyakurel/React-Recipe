@@ -1,6 +1,32 @@
+//router properties import
+import { useLocation } from 'react-router-dom';
+
+//custome hook imports
+import { useFetch } from '../../hooks/useFetch';
+
+//component imports
+import RecipeList from '../../Component/RecipeList';
+
+//style imports
 import './Search.css';
+
 const Search = () => {
-  return <div>Search</div>;
+  const queryString = useLocation().search;
+  const queryParams = new URLSearchParams(queryString);
+  const query = queryParams.get('q');
+
+  const url = `http://localhost:3000/recipes?q=${query}`;
+
+  const { error, loading, data } = useFetch(url);
+
+  return (
+    <div className='search'>
+      <h2 className='page-title'>Recipe including: '{query}'</h2>
+      {error && <p className='error'>{error}</p>}
+      {loading && <em className='loading'>Loading....</em>}
+      {data && <RecipeList recipes={data} />}
+    </div>
+  );
 };
 
 export default Search;

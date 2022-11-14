@@ -4,6 +4,8 @@ import { useFetch } from '../../hooks/useFetch';
 
 import { useState, useRef, useEffect } from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 const Create = () => {
   const [title, setTitle] = useState('');
   const [method, setMethod] = useState('');
@@ -13,7 +15,9 @@ const Create = () => {
 
   const titleRef = useRef(null);
 
-  const { postData, error, loading } = useFetch(
+  const history = useHistory();
+
+  const { postData, data, error, loading } = useFetch(
     'http://localhost:3000/recipes',
     'POST'
   );
@@ -33,6 +37,13 @@ const Create = () => {
       cookingTime: `${cookingTime} mins`,
     });
   };
+
+  //after the data changes component will be re-evaluated thus push the user to home page
+  useEffect(() => {
+    if (data) {
+      history.push('/');
+    }
+  }, [data, history]);
 
   //function to add the ingrediants
   const handleAddIngrediants = (e) => {

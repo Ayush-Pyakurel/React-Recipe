@@ -82,6 +82,27 @@
       "method": "Mix them and have a bite",
       "cookingTime": "10 mins",
       "id": "QBI1Ud0"
+    },
+    {
+      "title": "Rice",
+      "ingredients": [
+        "Rice",
+        "water"
+      ],
+      "method": "Put rice in water and wait for 2 sitti",
+      "cookingTime": "10 mins",
+      "id": "zCWGKN9"
+    },
+    {
+      "title": "Haluwa",
+      "ingredients": [
+        "Suji",
+        "suger",
+        "ghee"
+      ],
+      "method": "mix everything and cook well",
+      "cookingTime": "15 mins",
+      "id": "uOt5qE4"
     }
   ]
 }
