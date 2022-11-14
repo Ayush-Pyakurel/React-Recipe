@@ -89,7 +89,7 @@ const Create = () => {
             </div>
           </label>
           <p>
-            Current Ingrediants:{' '}
+            Current Ingrediants:
             {ingredients &&
               ingredients.map((ingrediant) => (
                 <em key={ingrediant}>{ingrediant},</em>
