@@ -13,7 +13,7 @@ const themeReducer = (state, action) => {
 
 //function to provide the value to the component that uses ThemeContext
 export function ThemeProvider({ children }) {
-  const [state, dispatch] = useReducer(themeReducer, { color: 'grey' });
+  const [state, dispatch] = useReducer(themeReducer, { color: '#58249c' });
 
   const changeColor = (color) => {
     dispatch({ type: 'CHANGE_COLOR', payload: color });

@@ -12,12 +12,14 @@ import Search from './Pages/search/Search';
 
 //component import
 import Navbar from './Component/Navbar';
+import ThemeSelector from './Component/ThemeSelector';
 
 function App() {
   return (
     <div className='App'>
       <BrowserRouter>
         <Navbar />
+        <ThemeSelector />
         <Switch>
           <Route exact path='/'>
             <Home />
