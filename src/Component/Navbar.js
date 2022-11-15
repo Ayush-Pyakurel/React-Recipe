@@ -6,7 +6,7 @@ import { useTheme } from '../hooks/useTheme';
 import SearchBar from './SearchBar.js';
 
 const Navbar = () => {
-  const { color, changeColor } = useTheme();
+  const { color } = useTheme();
 
   return (
     <div className='navbar' style={{ background: color }}>
