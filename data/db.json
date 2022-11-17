@@ -103,6 +103,19 @@
       "method": "mix everything and cook well",
       "cookingTime": "15 mins",
       "id": "uOt5qE4"
+    },
+    {
+      "title": "Spaghetti",
+      "ingredients": [
+        "Spaghetti",
+        "Meat",
+        "Meat Ball",
+        "Slat",
+        "tomato"
+      ],
+      "method": "blah blah blaha//./....",
+      "cookingTime": "30 mins",
+      "id": "80FKHlx"
     }
   ]
 }

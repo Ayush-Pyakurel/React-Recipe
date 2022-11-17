@@ -32,3 +32,13 @@
   text-align: center;
   line-height: 1.2em;
 }
+
+.recipe.dark {
+  background: #555;
+  color: white;
+}
+
+.recipe.dark .page-title,
+.recipe.dark li {
+  color: white;
+}

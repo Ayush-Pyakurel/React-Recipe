@@ -23,6 +23,7 @@ const ThemeSelector = () => {
           src={modeIcon}
           alt='mode-toggling-icon'
           onClick={handleModeChange}
+          style={{ filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)' }}
         />
       </div>
       <div className='theme-buttons'>

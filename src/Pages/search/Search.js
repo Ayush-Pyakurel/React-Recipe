@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 //custome hook imports
 import { useFetch } from '../../hooks/useFetch';
+import { useTheme } from '../../hooks/useTheme';
 
 //component imports
 import RecipeList from '../../Component/RecipeList';
@@ -19,8 +20,10 @@ const Search = () => {
 
   const { error, loading, data } = useFetch(url);
 
+  const { mode } = useTheme();
+
   return (
-    <div className='search'>
+    <div className={`search ${mode}`}>
       <h2 className='page-title'>Recipe including: '{query}'</h2>
       {error && <p className='error'>{error}</p>}
       {loading && <em className='loading'>Loading....</em>}
