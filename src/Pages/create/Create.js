@@ -5,6 +5,7 @@ import { useFetch } from '../../hooks/useFetch';
 import { useState, useRef, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 
 const Create = () => {
   const [title, setTitle] = useState('');
@@ -16,6 +17,8 @@ const Create = () => {
   const titleRef = useRef(null);
 
   const history = useHistory();
+
+  const { mode } = useTheme();
 
   const { postData, data, error, loading } = useFetch(
     'http://localhost:3000/recipes',
@@ -61,7 +64,7 @@ const Create = () => {
   };
 
   return (
-    <div className='create'>
+    <div className={`create ${mode}`}>
       <h2 className='page-title'>Add New Recipe: </h2>
 
       <form onSubmit={handleFormSubmit}>

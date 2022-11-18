@@ -37,3 +37,9 @@
 .ingrediants button {
   margin: 0 0 0 10px;
 }
+
+/* dark mode */
+.create.dark label,
+.create.dark p {
+  color: white;
+}

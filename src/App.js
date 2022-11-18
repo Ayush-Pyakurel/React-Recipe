@@ -13,9 +13,9 @@ import Search from './Pages/search/Search';
 //component import
 import Navbar from './Component/Navbar';
 import ThemeSelector from './Component/ThemeSelector';
-import { useTheme } from './hooks/useTheme';
 
 //custome hook import
+import { useTheme } from './hooks/useTheme';
 
 function App() {
   const { mode } = useTheme();
