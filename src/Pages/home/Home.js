@@ -30,14 +30,28 @@ const Home = () => {
       .collection('recipes')
       .get()
       .then((snapshot) => {
-        console.log(snapshot);
+        if (snapshot.empty) {
+          setError('No recipe to load');
+          setLoading(false);
+        } else {
+          let result = [];
+          snapshot.docs.forEach((doc) => {
+            result.push({ id: doc.id, ...doc.data() });
+          });
+          setData(result);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
       });
   }, []);
 
   return (
     <div className='home'>
       {error && <p className='error'>{error}</p>}
-      {loading && <p className='loading'>Loading....</p>}
+      {loading && <p className='loading'>Loading....!!</p>}
       {data && <RecipeList recipes={data} />}
     </div>
   );
