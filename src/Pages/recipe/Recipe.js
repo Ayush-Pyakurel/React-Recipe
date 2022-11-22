@@ -24,18 +24,23 @@ export default function Recipe() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const { mode } = useTheme();
+
   useEffect(() => {
+    setLoading(true);
     projectFirestore
       .collection('recipes')
       .doc(id)
       .get()
       .then((doc) => {
-        setLoading(true);
-        console.log(doc);
+        if (doc.exists) {
+          setLoading(false);
+          setRecipe(doc.data());
+        } else {
+          setError('Could not fetch the data!!!!');
+        }
       });
   }, [id]);
-
-  const { mode } = useTheme();
 
   return (
     <div className={`recipe ${mode}`}>
