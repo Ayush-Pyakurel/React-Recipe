@@ -28,11 +28,9 @@ export default function Recipe() {
 
   useEffect(() => {
     setLoading(true);
-    projectFirestore
+    const unsubscribe = projectFirestore
       .collection('recipes')
-      .doc(id)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.exists) {
           setLoading(false);
           setRecipe(doc.data());
@@ -41,6 +39,9 @@ export default function Recipe() {
           setLoading(false);
         }
       });
+
+    // clean up function to unsubscrib real time event listener
+    return () => unsubscribe();
   }, [id]);
 
   return (
