@@ -38,6 +38,7 @@ export default function Recipe() {
           setRecipe(doc.data());
         } else {
           setError('Could not fetch the data!!!!');
+          setLoading(false);
         }
       });
   }, [id]);

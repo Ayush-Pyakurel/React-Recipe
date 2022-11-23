@@ -1,6 +1,9 @@
 import './Create.css';
 
-import { useFetch } from '../../hooks/useFetch';
+// import { useFetch } from '../../hooks/useFetch';
+
+//import firebase
+import { projectFirestore } from '../../firebase/config';
 
 import { useState, useRef, useEffect } from 'react';
 
@@ -13,6 +16,8 @@ const Create = () => {
   const [cookingTime, setCookingTime] = useState('');
   const [newIngrediants, setNewIngrediants] = useState('');
   const [ingredients, setIngrediants] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const titleRef = useRef(null);
 
@@ -20,10 +25,10 @@ const Create = () => {
 
   const { mode } = useTheme();
 
-  const { postData, data, error, loading } = useFetch(
-    'http://localhost:3000/recipes',
-    'POST'
-  );
+  // const { postData, data, error, loading } = useFetch(
+  //   'http://localhost:3000/recipes',
+  //   'POST'
+  // );
 
   //auto focus on the first input field immediately the component render
   useEffect(() => {
@@ -31,22 +36,32 @@ const Create = () => {
   }, []);
 
   //funtion to submit the form
-  const handleFormSubmit = (e) => {
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    postData({
+    const documentObject = {
       title,
       ingredients,
       method,
-      cookingTime: `${cookingTime} mins`,
-    });
+      cookingTime: `${cookingTime} minutes`,
+    };
+    setLoading(true);
+    try {
+      await projectFirestore.collection('recipes').add(documentObject);
+      setLoading(false);
+      history.push('/');
+      throw new Error('Some error occred!!!');
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
-  //after the data changes component will be re-evaluated thus push the user to home page
-  useEffect(() => {
-    if (data) {
-      history.push('/');
-    }
-  }, [data, history]);
+  // //after the data changes component will be re-evaluated thus push the user to home page
+  // useEffect(() => {
+  //   if (data) {
+  //     history.push('/');
+  //   }
+  // }, [data, history]);
 
   //function to add the ingrediants
   const handleAddIngrediants = (e) => {
