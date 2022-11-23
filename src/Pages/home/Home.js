@@ -26,10 +26,8 @@ const Home = () => {
 
     //accessing the database collection form firebase
     //fetching data is asynchronous task; so it returns promise, that is why .then() and it return a function which takes snapshot(snapshot of the collection) as the argument
-    projectFirestore
-      .collection('recipes')
-      .get()
-      .then((snapshot) => {
+    const unsubscribe = projectFirestore.collection('recipes').onSnapshot(
+      (snapshot) => {
         if (snapshot.empty) {
           setError('No recipe to load');
           setLoading(false);
@@ -41,11 +39,15 @@ const Home = () => {
           setData(result);
           setLoading(false);
         }
-      })
-      .catch((err) => {
+      },
+      (err) => {
         setError(err.message);
         setLoading(false);
-      });
+      }
+    );
+
+    //unsubsribing the event listener onSnapshot()
+    return () => unsubscribe();
   }, []);
 
   return (

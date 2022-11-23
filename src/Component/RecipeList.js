@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 //style import
 import '../Component/RecipeList.css';
 
+//import icon
+import DeleteIcon from '../assets/delete-icon.svg';
+
+//import firebase/firestore
+import { projectFirestore } from '../firebase/config';
+
 //custome hook import
 import { useTheme } from '../hooks/useTheme';
 
@@ -15,6 +21,10 @@ const RecipeList = ({ recipes }) => {
     return <div className='error'>No Recipe to display...</div>;
   }
 
+  const handleDelete = (id) => {
+    projectFirestore.collection('recipes').doc(id).delete();
+  };
+
   return (
     <div className='recipe-list'>
       {recipes.map((recipe) => {
@@ -24,6 +34,12 @@ const RecipeList = ({ recipes }) => {
             <p>{recipe.cookingTime}</p>
             <div>{recipe.method.substring(0, 100)}...</div>
             <Link to={`/recipe/${recipe.id}`}>Cook This</Link>
+            <img
+              src={DeleteIcon}
+              alt='delete-icon'
+              className='delete'
+              onClick={() => handleDelete(recipe.id)}
+            />
           </div>
         );
       })}
