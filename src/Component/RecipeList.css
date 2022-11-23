@@ -61,4 +61,6 @@
   right: 10px;
   cursor: pointer;
   filter: invert(60%);
+  width: 35px;
+  height: auto;
 }
