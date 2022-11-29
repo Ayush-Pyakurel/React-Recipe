@@ -1,18 +1,18 @@
 //styles import
-import './Recipe.css';
+import "./Recipe.css";
 
 //react router properties import
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 //costume hook imports
 // import { useFetch } from '../../hooks/useFetch';
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from "../../hooks/useTheme";
 
 //import react hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 //import firestore
-import { projectFirestore } from '../../firebase/config';
+import { projectFirestore } from "../../firebase/config";
 
 export default function Recipe() {
   //accessing the route parameter; and whenever we go to particular recipe id of the recipe will be attached to url
@@ -29,13 +29,14 @@ export default function Recipe() {
   useEffect(() => {
     setLoading(true);
     const unsubscribe = projectFirestore
-      .collection('recipes')
+      .collection("recipes")
+      .doc(id)
       .onSnapshot((doc) => {
         if (doc.exists) {
           setLoading(false);
           setRecipe(doc.data());
         } else {
-          setError('Could not fetch the data!!!!');
+          setError("Could not fetch the data!!!!");
           setLoading(false);
         }
       });
@@ -46,11 +47,11 @@ export default function Recipe() {
 
   return (
     <div className={`recipe ${mode}`}>
-      {error && <p className='error'>{error}</p>}
-      {loading && <p className='loading'>Loading...</p>}
+      {error && <p className="error">{error}</p>}
+      {loading && <p className="loading">Loading...</p>}
       {recipe && (
         <>
-          <h1 className='page-title'>{recipe.title}</h1>
+          <h1 className="page-title">{recipe.title}</h1>
           <p>{recipe.cookingTime}</p>
           <ul>
             {recipe.ingredients &&
@@ -58,7 +59,7 @@ export default function Recipe() {
                 return <li key={ingredient}>{ingredient}</li>;
               })}
           </ul>
-          <p className='method'>{recipe.method}</p>
+          <p className="method">{recipe.method}</p>
         </>
       )}
     </div>
